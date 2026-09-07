@@ -105,6 +105,7 @@ namespace NosCore.Packets.Tests
                 typeof(TbfPacket),
                 typeof(QrPacket),
                 typeof(SqstPacket),
+                typeof(SkiPacket),
                 typeof(EInfoNpcMonsterPacket)
             });
 
@@ -1304,6 +1305,38 @@ namespace NosCore.Packets.Tests
             };
 
             Assert.AreEqual("in 9 1046 6467573 52 154 10 0 0 14643732", Serializer.Serialize(packet));
+        }
+
+        [TestMethod]
+        public void SerializeSkiPacketMatchesCurrentClientLayout()
+        {
+            var packet = new SkiPacket
+            {
+                PrimarySkillVnum = 240,
+                SecondarySkillVnum = 241,
+                SkillVnums = new List<short> { 240, 241, 236 }
+            };
+
+            Assert.AreEqual("ski 0 240 241 240 241 236", Serializer.Serialize(packet));
+        }
+
+        [TestMethod]
+        public void SerializeGuriPacketWithMovementValues()
+        {
+            var packet = new GuriPacket
+            {
+                Type = GuriPacketType.Script,
+                Argument = 1,
+                SecondArgument = 2,
+                EntityId = 3,
+                Value = 4,
+                SecondValue = 5,
+                ThirdValue = 6,
+                FourthValue = 7,
+                FifthValue = -1
+            };
+
+            Assert.AreEqual("guri 3 1 2 3 4 5 6 7 -1", Serializer.Serialize(packet));
         }
     }
 }
