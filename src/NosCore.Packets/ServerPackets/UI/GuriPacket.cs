@@ -38,5 +38,8 @@ namespace NosCore.Packets.ServerPackets.UI
 
         [PacketIndex(8, IsOptional = true)]
         public int? FifthValue { get; set; }
+
+        [PacketIndex(9, IsOptional = true)]
+        public int? SixthValue { get; set; }
     }
 }
