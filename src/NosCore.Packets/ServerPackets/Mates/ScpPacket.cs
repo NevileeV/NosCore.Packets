@@ -113,5 +113,8 @@ namespace NosCore.Packets.ServerPackets.Mates
 
         [PacketIndex(32)]
         public bool IsSummonable { get; set; }
+
+        [PacketIndex(33)]
+        public int Unknown2 { get; set; }
     }
 }

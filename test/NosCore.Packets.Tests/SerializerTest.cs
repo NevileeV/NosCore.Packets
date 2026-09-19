@@ -1097,6 +1097,52 @@ namespace NosCore.Packets.Tests
         }
 
         [TestMethod]
+        public void SerializeScpPacketMatchesModernTraceShape()
+        {
+            var p = new ScpPacket
+            {
+                PetId = 0,
+                NpcMonsterVNum = 333,
+                TransportId = 2000001,
+                Level = 1,
+                Loyalty = 1000,
+                Experience = 0,
+                Unknow1 = 0,
+                AttackUpgrade = 0,
+                DamageMinimum = 10,
+                DamageMaximum = 20,
+                Concentrate = 30,
+                CriticalChance = 4,
+                CriticalRate = 70,
+                DefenceUpgrade = 0,
+                CloseDefence = 10,
+                DefenceDodge = 11,
+                DistanceDefence = 12,
+                DistanceDefenceDodge = 13,
+                MagicDefence = 14,
+                Element = 0,
+                FireResistance = 0,
+                WaterResistance = 0,
+                LightResistance = 0,
+                DarkResistance = 0,
+                Hp = 100,
+                MaxHp = 100,
+                Mp = 50,
+                MaxMp = 50,
+                IsTeamMember = false,
+                XpLoad = 20,
+                CanPickUp = false,
+                Name = "Chicken",
+                IsSummonable = true,
+                Unknown2 = 0
+            };
+
+            var line = Serializer.Serialize(p);
+            Assert.AreEqual(35, line.Split(' ').Length);
+            Assert.IsTrue(line.EndsWith(" 1 0"), line);
+        }
+
+        [TestMethod]
         public void SerializeCtlPacketMatchesTrace()
         {
             var p = new CtlPacket { Type = 2, PetId = 1454169, Action = 3, Unknown = 0 };
