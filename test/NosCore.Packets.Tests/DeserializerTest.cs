@@ -219,6 +219,21 @@ namespace NosCore.Packets.Tests
         }
 
         [TestMethod]
+        public void DeserializeCurrentUseItemPacketWithoutShellTarget()
+        {
+            var packet = (UseItemPacket)Deserializer.Deserialize("18815 u_i 2 2000003 1 0 0 0");
+
+            Assert.AreEqual(VisualType.Player, packet.VisualType);
+            Assert.AreEqual(2000003, packet.VisualId);
+            Assert.AreEqual(PocketType.Main, packet.Type);
+            Assert.AreEqual(0, packet.Slot);
+            Assert.AreEqual(0, packet.Mode);
+            Assert.AreEqual(0, packet.Parameter);
+            Assert.IsNull(packet.TargetType);
+            Assert.IsNull(packet.TargetSlot);
+        }
+
+        [TestMethod]
         public void DeserializeShellApplyUseItemPacket()
         {
             var packet = (UseItemPacket)Deserializer.Deserialize("u_i 1 123 4 7 1 1 4 3");
