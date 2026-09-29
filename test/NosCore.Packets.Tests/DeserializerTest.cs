@@ -219,6 +219,18 @@ namespace NosCore.Packets.Tests
         }
 
         [TestMethod]
+        public void DeserializeShellApplyUseItemPacket()
+        {
+            var packet = (UseItemPacket)Deserializer.Deserialize("u_i 1 123 4 7 1 1 4 3");
+            Assert.AreEqual(PocketType.Equipment, packet.Type);
+            Assert.AreEqual(7, packet.Slot);
+            Assert.AreEqual(1, packet.Mode);
+            Assert.AreEqual(1, packet.Parameter);
+            Assert.AreEqual(PocketType.Equipment, packet.TargetType);
+            Assert.AreEqual(3, packet.TargetSlot);
+        }
+
+        [TestMethod]
         public void DeserializeSpecialWithKeepalive()
         {
             var packet = (UseItemPacket)Deserializer.Deserialize("12345 u_i 2 3 4 5 6");
