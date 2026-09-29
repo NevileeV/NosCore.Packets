@@ -6,6 +6,7 @@
 
 using NosCore.Packets.ClientPackets.Chat;
 using NosCore.Packets.ClientPackets.Inventory;
+using ClientGuriPacket = NosCore.Packets.ClientPackets.UI.GuriPacket;
 using NosCore.Packets.ClientPackets.Login;
 using NosCore.Packets.ClientPackets.Movement;
 using NosCore.Packets.ClientPackets.Shops;
@@ -216,6 +217,19 @@ namespace NosCore.Packets.Tests
         {
             var packet = (UseItemPacket)Deserializer.Deserialize("u_i 2 3 4 5 6");
             Assert.AreEqual(6, packet.Mode);
+        }
+
+        [TestMethod]
+        public void DeserializeLiveShellIdentificationGuri()
+        {
+            var deserializer = new Deserializer(new[] { typeof(ClientGuriPacket) });
+
+            var packet = (ClientGuriPacket)deserializer.Deserialize("51522 guri 204 0 4");
+
+            Assert.AreEqual(GuriPacketType.ShellIdentification, packet.Type);
+            Assert.AreEqual(0, packet.Argument);
+            Assert.AreEqual(4, packet.VisualId);
+            Assert.IsTrue(packet.IsValid);
         }
 
         [TestMethod]
