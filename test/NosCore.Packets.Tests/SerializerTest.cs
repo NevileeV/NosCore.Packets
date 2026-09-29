@@ -133,6 +133,16 @@ namespace NosCore.Packets.Tests
         }
 
         [TestMethod]
+        public void SerializeShellIdentificationOpenPacket()
+        {
+            var serializer = new Serializer(new[] { typeof(ShellIdentificationOpenPacket) });
+
+            var packet = serializer.Serialize(new ShellIdentificationOpenPacket());
+
+            Assert.AreEqual("guri 18 0", packet);
+        }
+
+        [TestMethod]
         public void SerializePacketWithNullableOptional()
         {
             var testPacket = new NInvPacket
